@@ -2,7 +2,7 @@
 
 //create an array to store the array of objects for each picture
 Products.possibleProducts =[];
-
+var imageAssortment =[];
 //create a constructor function for the images
 function Products(filepath, name) {
   this.filepath = filepath;
@@ -27,10 +27,10 @@ new Products('img/pen.jpg', 'Utensil Pens');
 new Products('img/pet-sweep.jpg', 'Pet Sweep Dusting Boots');
 new Products('img/scissors.jpg', 'Pizza Slice Scissors');
 new Products('img/shark.jpg', 'Shark Sleeping Bag');
-new Products('img/sweep.jpg', 'Baby Dusting Romper');
+new Products('img/sweep.png', 'Baby Dusting Romper');
 new Products('img/tauntaun.jpg', 'TaunTaun Sleeping Bag');
 new Products('img/unicorn.jpg', 'Unicorn Meat');
-new Products('img/usb.jpg', 'Octopus Tentacle USB');
+new Products('img/usb.gif', 'Octopus Tentacle USB');
 new Products('img/water-can.jpg', 'Modern Art Watering Can');
 new Products('img/wine-glass.jpg', 'Imbibing Moderator Wine Glass');
 
@@ -50,15 +50,30 @@ function randomImage() {
   var randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
   var randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
   var randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
-  //search the indexes randomly
-  pic1Element.src = Products.possibleProducts[randomIndex1].filepath;
-  pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
-  pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
 
-  pic1Element.alt = Products.possibleProducts[randomIndex1].name;
-  pic2Element.alt = Products.possibleProducts[randomIndex2].name;
-  pic3Element.alt = Products.possibleProducts[randomIndex3].name;
+  //search the indexes randomly
+  if ((randomIndex1 !== randomIndex2 && randomIndex3) && (randomIndex2 !== randomIndex1 && randomIndex3) && (randomIndex3 !== randomIndex1 && randomIndex2)) {
+    pic1Element.src = Products.possibleProducts[randomIndex1].filepath;
+    pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
+    pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
+
+    pic1Element.alt = Products.possibleProducts[randomIndex1].name;
+    pic2Element.alt = Products.possibleProducts[randomIndex2].name;
+    pic3Element.alt = Products.possibleProducts[randomIndex3].name;
+  }
+  imageAssortment = [randomIndex1, randomIndex2, randomIndex3];
+  console.log([randomIndex1, randomIndex2, randomIndex3]);
+  viewed(imageAssortment);
 }
+//trying to find out how many times a picture is shown
+function viewed(imageAssortment) {
+  for (var j = 0; j < imageAssortment.length; j++) {
+    Products.possibleProducts[imageAssortment[j]].timesShown++;
+    console.log( Products.possibleProducts[imageAssortment[j]].timesShown);
+  }
+}
+
+
 
 //render the image on the page
 randomImage();
