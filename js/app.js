@@ -3,6 +3,7 @@
 //create an array to store the array of objects for each picture
 Products.possibleProducts =[];
 var imageAssortment =[];
+var guessesCounted = 0;
 //create a constructor function for the images
 function Products(filepath, name) {
   this.filepath = filepath;
@@ -52,27 +53,34 @@ function randomImage() {
   var randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
 
   //search the indexes randomly
-  if ((randomIndex1 !== randomIndex2 && randomIndex3) && (randomIndex2 !== randomIndex1 && randomIndex3) && (randomIndex3 !== randomIndex1 && randomIndex2)) {
-    pic1Element.src = Products.possibleProducts[randomIndex1].filepath;
-    pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
-    pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
-
-    pic1Element.alt = Products.possibleProducts[randomIndex1].name;
-    pic2Element.alt = Products.possibleProducts[randomIndex2].name;
-    pic3Element.alt = Products.possibleProducts[randomIndex3].name;
+  while ((randomIndex1 === randomIndex2) || (randomIndex2 === randomIndex3) || (randomIndex3 === randomIndex1)) {
+    randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
+    randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
+    randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
   }
+  // if ((randomIndex1 !== randomIndex2 && randomIndex3) && (randomIndex2 !== randomIndex1 && randomIndex3) && (randomIndex3 !== randomIndex1 && randomIndex2)) {
+  pic1Element.src = Products.possibleProducts[randomIndex1].filepath;
+  pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
+  pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
+
+  pic1Element.alt = Products.possibleProducts[randomIndex1].name;
+  pic2Element.alt = Products.possibleProducts[randomIndex2].name;
+  pic3Element.alt = Products.possibleProducts[randomIndex3].name;
+  // viewed(imageAssortment);
+
   imageAssortment = [randomIndex1, randomIndex2, randomIndex3];
-  console.log([randomIndex1, randomIndex2, randomIndex3]);
+  console.log(imageAssortment);
   viewed(imageAssortment);
 }
+
 //trying to find out how many times a picture is shown
 function viewed(imageAssortment) {
   for (var j = 0; j < imageAssortment.length; j++) {
     Products.possibleProducts[imageAssortment[j]].timesShown++;
-    console.log( Products.possibleProducts[imageAssortment[j]].timesShown);
+    // console.log( Products.possibleProducts[imageAssortment[j]].timesShown);
+    console.log(Products.possibleProducts[imageAssortment[j]].name + ' has shown up ' + Products.possibleProducts[imageAssortment[j]].timesShown + ' time(s)');
   }
 }
-
 
 
 //render the image on the page
