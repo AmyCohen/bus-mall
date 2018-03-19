@@ -13,10 +13,27 @@ function Products(filepath, name) {
 }
 
 //create new instances for each picture
-new Products('img/bag.jpg', 'bag');
-new Products('img/banana.jpg', 'banana');
-new Products('img/bathroom.jpg', 'bathroom');
-new Products('img/boots.jpg', 'boots');
+new Products('img/bag.jpg', 'R2D2 Rolling Bag');
+new Products('img/banana.jpg', 'Banana Slicer');
+new Products('img/bathroom.jpg', 'Bathroom Tech Stand');
+new Products('img/boots.jpg', 'Toeless Rain Boots');
+new Products('img/breakfast.jpg', 'Breakfast Station');
+new Products('img/bubblegum.jpg', 'Meatball Bubblegum');
+new Products('img/chair.jpg', 'Modern Art Chair');
+new Products('img/cthulhu.jpg', 'Cthulhu Action Figure');
+new Products('img/dog-duck.jpg', 'Dog Duck Mask');
+new Products('img/dragon.jpg', 'Dragon Meat');
+new Products('img/pen.jpg', 'Utensil Pens');
+new Products('img/pet-sweep.jpg', 'Pet Sweep Dusting Boots');
+new Products('img/scissors.jpg', 'Pizza Slice Scissors');
+new Products('img/shark.jpg', 'Shark Sleeping Bag');
+new Products('img/sweep.jpg', 'Baby Dusting Romper');
+new Products('img/tauntaun.jpg', 'TaunTaun Sleeping Bag');
+new Products('img/unicorn.jpg', 'Unicorn Meat');
+new Products('img/usb.jpg', 'Octopus Tentacle USB');
+new Products('img/water-can.jpg', 'Modern Art Watering Can');
+new Products('img/wine-glass.jpg', 'Imbibing Moderator Wine Glass');
+
 
 //access the DOM element
 var pic1Element = document.getElementById('pic1');
