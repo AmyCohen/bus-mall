@@ -111,8 +111,9 @@ function handleClick(event) {
 
   if(Products.allotedGuesses > 24) {
   //turn off event listener
+    ulImageElement.removeEventListener('click', handleClick);
 
-  //if greater than 24, display results as a list
+    //if greater than 24, display results as a list
     showSelections();
 
     //update image selections
