@@ -15,7 +15,7 @@ var pic3Element = document.getElementById('pic3');
 
 //access the ul element from the DOM
 var ulImageElement = document.getElementById('imageClicked');
-var ulSelectionsElement = document.getElementById('selctions');
+// var ulSelectionsElement = document.getElementById('selctions');
 
 
 //create a constructor function for the images
