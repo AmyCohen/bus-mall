@@ -41,6 +41,8 @@ new Products('img/wine-glass.jpg', 'Imbibing Moderator Wine Glass');
 var pic1Element = document.getElementById('pic1');
 var pic2Element = document.getElementById('pic2');
 var pic3Element = document.getElementById('pic3');
+
+
 //create an event listener that doesn't go beyond 25 votes
 pic1Element.addEventListener('click', randomImage);
 pic2Element.addEventListener('click', randomImage);
@@ -57,37 +59,30 @@ function randomImage() {
   var randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
   var randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
 
-  while (allotedGuesses <= 25) {
   //search the indexes randomly
-    while ((randomIndex1 === randomIndex2) || (randomIndex2 === randomIndex3) || (randomIndex3 === randomIndex1)) {
-      randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
-      randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
-      randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
-    }
-
-    imageAssortment.push(randomIndex1, randomIndex2, randomIndex3);
-
-    pic1Element.src = Products.possibleProducts[randomIndex1].filepath;
-    pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
-    pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
-
-    pic1Element.alt = Products.possibleProducts[randomIndex1].name;
-    pic2Element.alt = Products.possibleProducts[randomIndex2].name;
-    pic3Element.alt = Products.possibleProducts[randomIndex3].name;
-    allotedGuesses ++;
+  while ((randomIndex1 === randomIndex2) || (randomIndex2 === randomIndex3) || (randomIndex3 === randomIndex1)) {
+    randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
+    randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
+    randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
   }
+
+  imageAssortment.push(randomIndex1, randomIndex2, randomIndex3);
+
+  pic1Element.src = Products.possibleProducts[randomIndex1].filepath;
+  pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
+  pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
+
+  pic1Element.alt = Products.possibleProducts[randomIndex1].name;
+  pic2Element.alt = Products.possibleProducts[randomIndex2].name;
+  pic3Element.alt = Products.possibleProducts[randomIndex3].name;
+
   // viewed(imageAssortment);
   console.log(imageAssortment);
   viewed(imageAssortment);
+  whenClicked();
+}
 
-}
 // var itemClicked = [];
-var i = 0;
-function whatClicked() {
-  document.getElementById('pic1').value = i++;
-  document.getElementById('pic2').value = i++;
-  document.getElementById('pic3').value = i++;
-}
 // previousAssortment = imageAssortment;
 //trying to find out how many times a picture is shown
 function viewed(imageAssortment) {
@@ -97,6 +92,15 @@ function viewed(imageAssortment) {
   }
 }
 
+//TODO: function whenClicked inside of randomImage.
+function whenClicked(event) {
+  var picName = event.target.currentSrc.name;
+  for (var i = 0; i < Products.possibleProducts.length; i++)
+    if (Products.possibleProducts[i] === picName) {
+      Products.possibleProducts[i].timesClicked++;
+      console.log(Products.possibleProducts);
+    }
+}
 // function clicked(){
 //   pic1Element.onclick = Products.possibleProducts.timesClicked ++;
 //   pic2Element.onclick = Products.possibleProducts.timesClicked ++;
@@ -108,4 +112,4 @@ function viewed(imageAssortment) {
 
 //render the image on the page
 randomImage();
-whatClicked();
+whenClicked();
