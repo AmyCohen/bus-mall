@@ -5,6 +5,8 @@ Products.possibleProducts =[];
 Products.imageAssortment =[];
 Products.allotedGuesses = 0;
 
+var imageSelection = [];
+
 //access the DOM element
 var pic1Element = document.getElementById('pic1');
 var pic2Element = document.getElementById('pic2');
@@ -106,16 +108,20 @@ function handleClick(event) {
       Products.possibleProducts[i].timesClicked++;
     }
   }
-}
-ulImageElement.addEventListener('click', handleClick);
 
-if(Products.allotedGuesses > 24) {
+  if(Products.allotedGuesses > 24) {
   //turn off event listener
 
   //if greater than 24, display results as a list
-  showSelections();
-}
+    showSelections();
 
+    //update image selections
+    updateWhenClicked();
+  } else {
+    //if less than 25, keep displaying images
+    randomImage();
+  }
+}
 
 //function to create the image selections as a list
 function showSelections() {
@@ -124,10 +130,22 @@ function showSelections() {
     //1. Create the element
     var listSelectionElement = document.createElement('li');
     //2. Give it content
-    listSelectionElement.textContent = Products.possibleProducts[i].name + ' has ' + Product.possibleProducts[i].timesClicked + ' votes and was displayed ' + Products.possibleProducts[i].timesShown + ' times.';
+    listSelectionElement.textContent = Products.possibleProducts[i].name + ' has ' + Products.possibleProducts[i].timesClicked + ' votes and was displayed ' + Products.possibleProducts[i].timesShown + ' times.';
     //3. Append the element to the parent
     ulSelectionsElement.appendChild(listSelectionElement);
   }
 }
+
+function updateWhenClicked () {
+  for (var i = 0; i < Products.possibleProducts.length; i++) {
+    imageSelection[i] = Products.possibleProducts[i].timesClicked;
+  }
+}
+
+ulImageElement.addEventListener('click', handleClick);
+
 //render the image on the page - PAGE LOAD
 randomImage();
+
+
+
