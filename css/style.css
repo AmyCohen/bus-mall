@@ -27,3 +27,8 @@ margin: auto;
   margin: 20px;
 }
 
+canvas {
+  height: 400px;
+  width: 600px;
+}
+

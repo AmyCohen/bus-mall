@@ -88,6 +88,7 @@ function randomImage() {
   Products.possibleProducts[randomIndex3].timesShown++;
 
   //Track last images used (replaced my viewed Function)
+  console.log(Products.imageAssortment);
   Products.imageAssortment[0] = randomIndex1;
   Products.imageAssortment[1] = randomIndex2;
   Products.imageAssortment[2] = randomIndex3;
@@ -108,29 +109,36 @@ function handleClick(event) {
   //turn off event listener
     ulImageElement.removeEventListener('click', handleClick);
 
+    //------------Monday's Assignment: List----------------------------------------
     //if greater than 24, display results as a list
-    showSelections();
+    // showSelections();
+    //------------------------------------------------------------------------------
 
     //update image selections
     updateWhenClicked();
+
+    //display chart
+    renderChart();
+
   } else {
     //if less than 25, keep displaying images
     randomImage();
   }
 }
-
-//function to create the image selections as a list
-function showSelections() {
-  //create a list item to display the number of tiems an image was displayed AND the number of votes each one received
-  for (var i = 0; i < Products.possibleProducts.length; i++) {
-    //1. Create the element
-    var listSelectionElement = document.createElement('li');
-    //2. Give it content
-    listSelectionElement.textContent = Products.possibleProducts[i].name + ' has ' + Products.possibleProducts[i].timesClicked + ' votes and was displayed ' + Products.possibleProducts[i].timesShown + ' times.';
-    //3. Append the element to the parent
-    ulSelectionsElement.appendChild(listSelectionElement);
-  }
-}
+//------------Monday's Assignment: List----------------------------------------
+// //function to create the image selections as a list
+// function showSelections() {
+//   //create a list item to display the number of tiems an image was displayed AND the number of votes each one received
+//   for (var i = 0; i < Products.possibleProducts.length; i++) {
+//     //1. Create the element
+//     var listSelectionElement = document.createElement('li');
+//     //2. Give it content
+//     listSelectionElement.textContent = Products.possibleProducts[i].name + ' has ' + Products.possibleProducts[i].timesClicked + ' votes and was displayed ' + Products.possibleProducts[i].timesShown + ' times.';
+//     //3. Append the element to the parent
+//     ulSelectionsElement.appendChild(listSelectionElement);
+//   }
+// }
+//------------------------------------------------------------------------------
 
 function updateWhenClicked () {
   for (var i = 0; i < Products.possibleProducts.length; i++) {
@@ -151,7 +159,7 @@ function renderChart() {
   var context = document.getElementById('results-chart').getContext('2d');
 
   //establish an array of colors for the bars
-  var arrayOfColors = ['#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF','#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF',];
+  var arrayOfColors = ['#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF','#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF'];
 
   new Chart(context, {
     type: 'bar',
@@ -159,6 +167,7 @@ function renderChart() {
       labels: productNamesArray,
       datasets: [{
         label: 'Product Selections',
+        data: imageSelection,
         backgroundColor: arrayOfColors,
       }]
     },
