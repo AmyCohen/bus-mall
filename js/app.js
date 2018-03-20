@@ -3,12 +3,16 @@
 //create an array to store the array of objects for each picture
 Products.possibleProducts =[];
 Products.imageAssortment =[];
-var allotedGuesses = 0;
+Products.allotedGuesses = 0;
 
 //access the DOM element
 var pic1Element = document.getElementById('pic1');
 var pic2Element = document.getElementById('pic2');
 var pic3Element = document.getElementById('pic3');
+
+//access the ul element from the DOM
+var ulImageElement = document.getElementById('imageClicked');
+var ulSelectionsElement = document.getElementById('selctions');
 
 
 //create a constructor function for the images
@@ -92,14 +96,38 @@ function randomImage() {
   Products.imageAssortment[2] = randomIndex3;
 }
 
+function handleClick(event) {
+  //increment the click counter
+  Products.allotedGuesses++;
+  //increment the votes per image
+  //use a for loop to find which picture was clicked
+  for (var i = 0; i < Products.possibleProducts.length; i++) {
+    if(event.target.alt === Products.possibleProducts[i].name) {
+      Products.possibleProducts[i].timesClicked++;
+    }
+  }
+}
+ulImageElement.addEventListener('click', handleClick);
 
-// pic1Element.addEventListener('click', );
-// pic2Element.addEventListener('click', );
-// pic3Element.addEventListener('click', );
+if(Products.allotedGuesses > 24) {
+  //turn off event listener
 
-//TODO: function whenClicked inside of randomImage.
+  //if greater than 24, display results as a list
+  showSelections();
+}
 
 
-//render the image on the page
+//function to create the image selections as a list
+function showSelections() {
+  //create a list item to display the number of tiems an image was displayed AND the number of votes each one received
+  for (var i = 0; i < Products.possibleProducts.length; i++) {
+    //1. Create the element
+    var listSelectionElement = document.createElement('li');
+    //2. Give it content
+    listSelectionElement.textContent = Products.possibleProducts[i].name + ' has ' + Product.possibleProducts[i].timesClicked + ' votes and was displayed ' + Products.possibleProducts[i].timesShown + ' times.';
+    //3. Append the element to the parent
+    ulSelectionsElement.appendChild(listSelectionElement);
+  }
+}
+//render the image on the page - PAGE LOAD
 randomImage();
-// whenClicked();
