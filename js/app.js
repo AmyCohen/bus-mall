@@ -2,8 +2,14 @@
 
 //create an array to store the array of objects for each picture
 Products.possibleProducts =[];
-var imageAssortment =[];
+Products.imageAssortment =[];
 var allotedGuesses = 0;
+
+//access the DOM element
+var pic1Element = document.getElementById('pic1');
+var pic2Element = document.getElementById('pic2');
+var pic3Element = document.getElementById('pic3');
+
 
 //create a constructor function for the images
 function Products(filepath, name) {
@@ -37,79 +43,63 @@ new Products('img/water-can.jpg', 'Modern Art Watering Can');
 new Products('img/wine-glass.jpg', 'Imbibing Moderator Wine Glass');
 
 
-//access the DOM element
-var pic1Element = document.getElementById('pic1');
-var pic2Element = document.getElementById('pic2');
-var pic3Element = document.getElementById('pic3');
 
 
 //create an event listener that doesn't go beyond 25 votes
-pic1Element.addEventListener('click', randomImage);
-pic2Element.addEventListener('click', randomImage);
-pic3Element.addEventListener('click', randomImage);
 
 //create array to hold current assortment to compare against next assortment
 // var previousAssortment = [];
 
 //create a random number function to randomly get the index for each image
 function randomImage() {
-  imageAssortment = [];
   //create a random number
   var randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
   var randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
   var randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
 
   //search the indexes randomly
-  while ((randomIndex1 === randomIndex2) || (randomIndex2 === randomIndex3) || (randomIndex3 === randomIndex1)) {
+  while ((randomIndex1 === randomIndex2) ||
+  (randomIndex2 === randomIndex3) ||
+  (randomIndex3 === randomIndex1) ||
+  (Products.imageAssortment.includes(randomIndex1)) ||
+  (Products.imageAssortment.includes(randomIndex2)) ||
+  (Products.imageAssortment.includes(randomIndex3 ))) {
+
+    console.log('duplicate caught!');
+
     randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
     randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
     randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
   }
 
-  imageAssortment.push(randomIndex1, randomIndex2, randomIndex3);
-
   pic1Element.src = Products.possibleProducts[randomIndex1].filepath;
-  pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
-  pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
-
   pic1Element.alt = Products.possibleProducts[randomIndex1].name;
+
+  pic2Element.src = Products.possibleProducts[randomIndex2].filepath;
   pic2Element.alt = Products.possibleProducts[randomIndex2].name;
+
+  pic3Element.src = Products.possibleProducts[randomIndex3].filepath;
   pic3Element.alt = Products.possibleProducts[randomIndex3].name;
 
-  // viewed(imageAssortment);
-  console.log(imageAssortment);
-  viewed(imageAssortment);
-  whenClicked();
+  //incremented the nuber of times displayed
+  Products.possibleProducts[randomIndex1].timesShown++;
+  Products.possibleProducts[randomIndex2].timesShown++;
+  Products.possibleProducts[randomIndex3].timesShown++;
+
+  //Track last images used (replaced my viewed Function)
+  Products.imageAssortment[0] = randomIndex1;
+  Products.imageAssortment[1] = randomIndex2;
+  Products.imageAssortment[2] = randomIndex3;
 }
 
-// var itemClicked = [];
-// previousAssortment = imageAssortment;
-//trying to find out how many times a picture is shown
-function viewed(imageAssortment) {
-  for (var j = 0; j < imageAssortment.length; j++) {
-    Products.possibleProducts[imageAssortment[j]].timesShown++;
-    console.log(Products.possibleProducts[imageAssortment[j]].name + ' has shown up ' + Products.possibleProducts[imageAssortment[j]].timesShown + ' time(s)');
-  }
-}
+
+// pic1Element.addEventListener('click', );
+// pic2Element.addEventListener('click', );
+// pic3Element.addEventListener('click', );
 
 //TODO: function whenClicked inside of randomImage.
-function whenClicked(event) {
-  var picName = event.target.currentSrc.name;
-  for (var i = 0; i < Products.possibleProducts.length; i++)
-    if (Products.possibleProducts[i] === picName) {
-      Products.possibleProducts[i].timesClicked++;
-      console.log(Products.possibleProducts);
-    }
-}
-// function clicked(){
-//   pic1Element.onclick = Products.possibleProducts.timesClicked ++;
-//   pic2Element.onclick = Products.possibleProducts.timesClicked ++;
-//   pic3Element.onclick = Products.possibleProducts.timesClicked ++;
-//   console.log(Products.possibleProducts.timesClicked);
-//   // button.innerHTML = "Click me: " + count;
-// }
 
 
 //render the image on the page
 randomImage();
-whenClicked();
+// whenClicked();
