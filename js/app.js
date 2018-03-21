@@ -182,7 +182,13 @@ function renderSelectionChart() {
       scales: {
         yAxes: [{
           ticks: {
-            beginAtZero: true
+            beginAtZero: true,
+            stepSize: 1,
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            autoSkip: false,
           }
         }]
       }
@@ -209,11 +215,6 @@ function renderImageChart() {
     },
     options: {
       scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
       }
     }
   });
