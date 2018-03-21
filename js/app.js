@@ -7,6 +7,7 @@ Products.allotedGuesses = 0;
 
 var imageSelection = [];
 var productNamesArray = [];
+var imageShown = [];
 
 //access the DOM element
 var pic1Element = document.getElementById('pic1');
@@ -87,6 +88,11 @@ function randomImage() {
   Products.possibleProducts[randomIndex2].timesShown++;
   Products.possibleProducts[randomIndex3].timesShown++;
 
+  //push to an array to track how many times an image is shown
+  for (var i = 0; i < Products.possibleProducts.length; i++) {
+    imageShown[i] = Products.possibleProducts[i].timesShown;
+  }
+
   //Track last images used (replaced my viewed Function)
   console.log(Products.imageAssortment);
   Products.imageAssortment[0] = randomIndex1;
@@ -118,7 +124,8 @@ function handleClick(event) {
     updateWhenClicked();
 
     //display chart
-    renderChart();
+    renderSelectionChart();
+    renderImageChart();
 
   } else {
     //if less than 25, keep displaying images
@@ -154,12 +161,12 @@ randomImage();
 
 
 //Use Chart.js to create a graph
-function renderChart() {
+function renderSelectionChart() {
   //access the canvas element from the DOM using var
   var context = document.getElementById('results-chart').getContext('2d');
 
   //establish an array of colors for the bars
-  var arrayOfColors = ['#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF', '#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF','#CCE0FF', '#B3D1FF', '#99C2FF', '#80B3FF', '#66A3FF'];
+  var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
   new Chart(context, {
     type: 'bar',
@@ -168,6 +175,35 @@ function renderChart() {
       datasets: [{
         label: 'Product Selections',
         data: imageSelection,
+        backgroundColor: arrayOfColors,
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+}
+
+function renderImageChart() {
+  //access the canvas element from the DOM using var
+  var context = document.getElementById('images-chart').getContext('2d');
+
+  //establish an array of colors for the bars
+  var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
+
+  new Chart(context, {
+    type: 'pie',
+    data: {
+      labels: productNamesArray,
+      datasets: [{
+        label: 'Images Shown',
+        data: imageShown,
         backgroundColor: arrayOfColors,
       }]
     },
