@@ -44,9 +44,6 @@ function pictureList () {
     for (var i = 0; i < Products.possibleProducts.length; i++){
       productNamesArray[i] = Products.possibleProducts[i].name;
     }
-
-    // fillArrays();
-
     return;
   }
 
@@ -218,7 +215,7 @@ function renderSelectionChart() {
         yAxes: [{
           ticks: {
             beginAtZero: true,
-            stepSize: 1,
+            stepSize: 5,
           }
         }],
         xAxes: [{
@@ -239,7 +236,7 @@ function renderImageChart() {
   var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
   new Chart(context, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: productNamesArray,
       datasets: [{
@@ -249,8 +246,13 @@ function renderImageChart() {
       }]
     },
     options: {
+      cutoutPercentage: 50,
+      legend: {
+        display: true,
+        position: 'left'
+      },
       scales: {
-      }
+      },
     }
   });
 }
