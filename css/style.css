@@ -29,14 +29,34 @@ section {
 section#imageClicked {
   background-color: bisque;
   margin-bottom: 40px;
-  width: 960px;
   border: 2px solid black;
+  width: 100%;
+}
+div.col-3 {
+  display: inline-block;
+  height: 300px;
+}
+
+div.col-3 div {
+  display: inline-block;
+  height: 300px;
+  /* float: left; */
+  width: auto;
+  /* overflow: hidden;  */
 }
 
 img {
-  box-shadow: 1px 2px 4px rgba(0, 0, 0, .5);
+  box-shadow: 5px 5px 4px rgba(0, 0, 0, .5);
+  /* display: inline-block; */
   margin: 30px;
-  width:25%;
+  height: 200px;
+}
+
+.thumbnail:hover {
+  box-shadow: 5px 5px 5px rgba(0, 153, 255, 0.5);
+  height: 25%;
+  width: 25%;
+
 }
 
 section.canvas {

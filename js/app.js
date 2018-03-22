@@ -191,7 +191,6 @@ pictureList();
 randomImage();
 
 
-
 //Use Chart.js to create a graph
 function renderSelectionChart() {
   //access the canvas element from the DOM using var
