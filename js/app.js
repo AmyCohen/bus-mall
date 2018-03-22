@@ -5,8 +5,13 @@ Products.possibleProducts =[];
 Products.imageAssortment =[];
 Products.allotedGuesses = 0;
 
-var imageSelection = [];
+//names only in array for graphs
 var productNamesArray = [];
+//votes per picture
+var imageSelection = [];
+
+console.log('first declaration of this array ', imageSelection);
+//how many times picture is shown
 var imageShown = [];
 
 //access the DOM element
@@ -16,7 +21,6 @@ var pic3Element = document.getElementById('pic3');
 
 //access the ul element from the DOM
 var ulImageElement = document.getElementById('imageClicked');
-// var ulSelectionsElement = document.getElementById('selctions');
 
 
 //create a constructor function for the images
@@ -29,28 +33,42 @@ function Products(filepath, name) {
   productNamesArray.push(this.name);
 }
 
-//create new instances for each picture
-new Products('img/bag.jpg', 'R2D2 Rolling Bag');
-new Products('img/banana.jpg', 'Banana Slicer');
-new Products('img/bathroom.jpg', 'Bathroom Tech Stand');
-new Products('img/boots.jpg', 'Toeless Rain Boots');
-new Products('img/breakfast.jpg', 'Breakfast Station');
-new Products('img/bubblegum.jpg', 'Meatball Bubblegum');
-new Products('img/chair.jpg', 'Modern Art Chair');
-new Products('img/cthulhu.jpg', 'Cthulhu Action Figure');
-new Products('img/dog-duck.jpg', 'Dog Duck Mask');
-new Products('img/dragon.jpg', 'Dragon Meat');
-new Products('img/pen.jpg', 'Utensil Pens');
-new Products('img/pet-sweep.jpg', 'Pet Sweep Dusting Boots');
-new Products('img/scissors.jpg', 'Pizza Slice Scissors');
-new Products('img/shark.jpg', 'Shark Sleeping Bag');
-new Products('img/sweep.png', 'Baby Dusting Romper');
-new Products('img/tauntaun.jpg', 'TaunTaun Sleeping Bag');
-new Products('img/unicorn.jpg', 'Unicorn Meat');
-new Products('img/usb.gif', 'Octopus Tentacle USB');
-new Products('img/water-can.jpg', 'Modern Art Watering Can');
-new Products('img/wine-glass.jpg', 'Imbibing Moderator Wine Glass');
+function pictureList () {
+  //write an "if statement" to check if this exists AND writes it to local storage
+  var pictures = localStorage.getItem('listOfProducts');
+  var productList = JSON.parse(pictures);
 
+  if (productList && productList.length) {
+    Products.possibleProducts = productList;
+
+    for (var i = 0; i < Products.possibleProducts.length; i++){
+      productNamesArray[i] = Products.possibleProducts[i].name;
+    }
+    return;
+  }
+
+  //create new instances for each picture
+  new Products('img/bag.jpg', 'R2D2 Rolling Bag');
+  new Products('img/banana.jpg', 'Banana Slicer');
+  new Products('img/bathroom.jpg', 'Bathroom Tech Stand');
+  new Products('img/boots.jpg', 'Toeless Rain Boots');
+  new Products('img/breakfast.jpg', 'Breakfast Station');
+  new Products('img/bubblegum.jpg', 'Meatball Bubblegum');
+  new Products('img/chair.jpg', 'Modern Art Chair');
+  new Products('img/cthulhu.jpg', 'Cthulhu Action Figure');
+  new Products('img/dog-duck.jpg', 'Dog Duck Mask');
+  new Products('img/dragon.jpg', 'Dragon Meat');
+  new Products('img/pen.jpg', 'Utensil Pens');
+  new Products('img/pet-sweep.jpg', 'Pet Sweep Dusting Boots');
+  new Products('img/scissors.jpg', 'Pizza Slice Scissors');
+  new Products('img/shark.jpg', 'Shark Sleeping Bag');
+  new Products('img/sweep.png', 'Baby Dusting Romper');
+  new Products('img/tauntaun.jpg', 'TaunTaun Sleeping Bag');
+  new Products('img/unicorn.jpg', 'Unicorn Meat');
+  new Products('img/usb.gif', 'Octopus Tentacle USB');
+  new Products('img/water-can.jpg', 'Modern Art Watering Can');
+  new Products('img/wine-glass.jpg', 'Imbibing Moderator Wine Glass');
+}
 
 //create a random number function to randomly get the index for each image
 function randomImage() {
@@ -67,7 +85,7 @@ function randomImage() {
   (Products.imageAssortment.includes(randomIndex2)) ||
   (Products.imageAssortment.includes(randomIndex3 ))) {
 
-    console.log('duplicate caught!');
+    // console.log('duplicate caught!');
 
     randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
     randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
@@ -94,7 +112,7 @@ function randomImage() {
   }
 
   //Track last images used (replaced my viewed Function)
-  console.log(Products.imageAssortment);
+  // console.log(Products.imageAssortment);
   Products.imageAssortment[0] = randomIndex1;
   Products.imageAssortment[1] = randomIndex2;
   Products.imageAssortment[2] = randomIndex3;
@@ -112,13 +130,12 @@ function handleClick(event) {
   }
 
   if(Products.allotedGuesses > 24) {
-  //turn off event listener
+    //turn off event listener
     ulImageElement.removeEventListener('click', handleClick);
 
-    //------------Monday's Assignment: List----------------------------------------
-    //if greater than 24, display results as a list
-    // showSelections();
-    //------------------------------------------------------------------------------
+    //save data to local storage upon completion of the list
+    var saveProducts = JSON.stringify(Products.possibleProducts);
+    localStorage.setItem('listOfProducts', saveProducts);
 
     //update image selections
     updateWhenClicked();
@@ -132,20 +149,6 @@ function handleClick(event) {
     randomImage();
   }
 }
-//------------Monday's Assignment: List----------------------------------------
-// //function to create the image selections as a list
-// function showSelections() {
-//   //create a list item to display the number of tiems an image was displayed AND the number of votes each one received
-//   for (var i = 0; i < Products.possibleProducts.length; i++) {
-//     //1. Create the element
-//     var listSelectionElement = document.createElement('li');
-//     //2. Give it content
-//     listSelectionElement.textContent = Products.possibleProducts[i].name + ' has ' + Products.possibleProducts[i].timesClicked + ' votes and was displayed ' + Products.possibleProducts[i].timesShown + ' times.';
-//     //3. Append the element to the parent
-//     ulSelectionsElement.appendChild(listSelectionElement);
-//   }
-// }
-//------------------------------------------------------------------------------
 
 function updateWhenClicked () {
   for (var i = 0; i < Products.possibleProducts.length; i++) {
@@ -153,11 +156,39 @@ function updateWhenClicked () {
   }
 }
 
+//---------------------------------------------
+// function updateWhenClicked () {
+
+//   for (var i = 0; i < Products.possibleProducts.length; i++) {
+//     //adding votes to local storage
+//     var saveImageSelections = JSON.stringify(Products.possibleProducts[i].timesClicked);
+//     localStorage.setItem('updatedVotes', saveImageSelections);
+//     console.log('stringifying ' , saveImageSelections);
+
+//     //call back that information and put it in an array
+//     imageSelection.push(JSON.parse(localStorage.getItem('updatedVotes')));
+
+//   }
+//   console.log('saving votes ', imageSelection);
+// }
+//---------------------------------------------
+
+
+// function fillArrays (){
+//   for (var i = 0; i<Products.possibleProducts; i++) {
+//     productNamesArray.push(Products.possibleProducts[i].name);
+//     imageSelection.push(Products.possibleProducts[i].timesClicked);
+//   }
+// }
+
+
+console.log('saving votes outside function', imageSelection);
+
 ulImageElement.addEventListener('click', handleClick);
 
 //render the image on the page - PAGE LOAD
+pictureList();
 randomImage();
-
 
 
 //Use Chart.js to create a graph
@@ -183,7 +214,7 @@ function renderSelectionChart() {
         yAxes: [{
           ticks: {
             beginAtZero: true,
-            stepSize: 1,
+            stepSize: 5,
           }
         }],
         xAxes: [{
@@ -204,7 +235,7 @@ function renderImageChart() {
   var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
   new Chart(context, {
-    type: 'pie',
+    type: 'doughnut',
     data: {
       labels: productNamesArray,
       datasets: [{
@@ -214,8 +245,13 @@ function renderImageChart() {
       }]
     },
     options: {
+      cutoutPercentage: 50,
+      legend: {
+        display: true,
+        position: 'left'
+      },
       scales: {
-      }
+      },
     }
   });
 }
