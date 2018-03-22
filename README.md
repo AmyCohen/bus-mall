@@ -7,6 +7,7 @@ Bus Mall will track  20 different objects to see their popularity with a focus g
 Used the .eslintrc.json and the .gitignore from the class repo
 Used the Meyer's css reset
 Color palette for the charts are from http://colrd.com/palette/18823/ and http://colrd.com/palette/18841/
+Box shadow help by https://www.cssmatic.com/box-shadow
 
 ## Prerequisites
 Used Chart.js Library for the bar graph, http://www.chartjs.org/docs/latest/
