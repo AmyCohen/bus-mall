@@ -110,7 +110,6 @@ function randomImage() {
   }
 
   //Track last images used (replaced my viewed Function)
-  // console.log(Products.imageAssortment);
   Products.imageAssortment[0] = randomIndex1;
   Products.imageAssortment[1] = randomIndex2;
   Products.imageAssortment[2] = randomIndex3;
@@ -119,8 +118,7 @@ function randomImage() {
 function handleClick(event) {
   //increment the click counter
   Products.allotedGuesses++;
-  //increment the votes per image
-  //use a for loop to find which picture was clicked
+  //increment the votes per image and loop through to find image that was clicked
   for (var i = 0; i < Products.possibleProducts.length; i++) {
     if(event.target.alt === Products.possibleProducts[i].name) {
       Products.possibleProducts[i].timesClicked++;
@@ -153,34 +151,6 @@ function updateWhenClicked () {
     imageSelection[i] = Products.possibleProducts[i].timesClicked;
   }
 }
-
-//---------------------------------------------
-// function updateWhenClicked () {
-
-//   for (var i = 0; i < Products.possibleProducts.length; i++) {
-//     //adding votes to local storage
-//     var saveImageSelections = JSON.stringify(Products.possibleProducts[i].timesClicked);
-//     localStorage.setItem('updatedVotes', saveImageSelections);
-//     console.log('stringifying ' , saveImageSelections);
-
-//     //call back that information and put it in an array
-//     imageSelection.push(JSON.parse(localStorage.getItem('updatedVotes')));
-
-//   }
-//   console.log('saving votes ', imageSelection);
-// }
-//---------------------------------------------
-
-
-// function fillArrays (){
-//   for (var i = 0; i<Products.possibleProducts; i++) {
-//     productNamesArray.push(Products.possibleProducts[i].name);
-//     imageSelection.push(Products.possibleProducts[i].timesClicked);
-//   }
-// }
-
-
-console.log('saving votes outside function', imageSelection);
 
 ulImageElement.addEventListener('click', handleClick);
 
