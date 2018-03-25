@@ -3,29 +3,63 @@
 }
 
 body {
-  background-color: azure;
   box-sizing: border-box;
+}
+header div {
+  background-color: #78ab35;
+  height: 300px;
+  width: 100%;
+}
+
+header img {
+  float: left;
+  height: 300px;
+  overflow: hidden;
+  width: auto;
 }
 
 h1 {
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 3em;
+  float: right;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 5em;
   margin: 20px;
+  overflow: hidden;
+  padding: 20px;
   text-align: center;
+}
+
+ body main {
+  background-color: white;
 }
 
 h2 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5em;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+.canvas h2 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5em;
+  margin-bottom: 5px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+
+h3 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.25em;
+  margin-bottom: 40px;
   text-align: center;
 }
 
 section#imageClicked {
   background-color: bisque;
-  /* border: 2px solid black; */
-  width: 100%;
+  border: 2px solid black;
+  width: 960px;
   margin: auto;
 }
 div.col-3 {
@@ -46,20 +80,19 @@ div.col-3 div img {
   border: 2px solid black;
   box-sizing: border-box;
   display: inline-block;
-  margin-top: 50px;
+  margin-top: 70px;
   height: 165px;
-  padding: 10px;
+  vertical-align: middle;
   width: auto;
 }
 
 .thumbnail:hover {
+  -webkit-box-shadow: 0px 0px 87px 5px rgba(120,171,53,1);
+  -moz-box-shadow: 0px 0px 87px 5px rgba(120,171,53,1);
+  box-shadow: 0px 0px 87px 5px rgba(120,171,53,1);
+  border: 8px solid white;
   height: 175px;
-  -webkit-box-shadow: 0px 0px 87px 5px rgba(0,187,255,1);
-  -moz-box-shadow: 0px 0px 87px 5px rgba(0,187,255,1);
-  box-shadow: 0px 0px 87px 5px rgba(0,187,255,1);
-  border: none;
   width: auto;
-  margin: auto;
 }
 
 section.canvas {
@@ -71,5 +104,14 @@ canvas {
   height: 10px;
   width: 100%;
   background-color: white;
+}
+
+footer {
+  width: 100%;
+}
+
+footer div img {
+  float: left;
+  width: 100%;
 }
 

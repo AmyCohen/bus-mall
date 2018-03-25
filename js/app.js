@@ -85,8 +85,6 @@ function randomImage() {
   (Products.imageAssortment.includes(randomIndex2)) ||
   (Products.imageAssortment.includes(randomIndex3 ))) {
 
-    // console.log('duplicate caught!');
-
     randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
     randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
     randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
@@ -214,7 +212,7 @@ function renderSelectionChart() {
         yAxes: [{
           ticks: {
             beginAtZero: true,
-            stepSize: 5,
+            stepSize: 1,
           }
         }],
         xAxes: [{
