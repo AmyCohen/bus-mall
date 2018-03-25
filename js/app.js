@@ -139,6 +139,7 @@ function handleClick(event) {
     //display chart
     renderSelectionChart();
     renderImageChart();
+    renderComparisonChart();
 
   } else {
     //if less than 25, keep displaying images
@@ -158,12 +159,14 @@ ulImageElement.addEventListener('click', handleClick);
 pictureList();
 randomImage();
 
-//CHART SECTION ONLY
-//establish an array of colors for the bars
-var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
-//added transpartent versions of the hex colors above
-var arrayOfAccentColors = ['rgba(142, 1, 81, 0.6)', 'rgba(197, 27, 126, 0.6)', 'rgba(222, 120, 174, 0.6)', 'rgba(241, 182, 219, 0.6)', 'rgba(253, 226, 240, 0.6)', 'rgba(231, 245, 209, 0.6)', 'rgba(183, 224, 133, 0.6)', 'rgba(128, 190, 65, 0.6)', 'rgba(76, 145, 33, 0.6)', 'rgba(40, 102, 25, 0.6)', 'rgba(82, 47, 5, 0.6)', 'rgba(138, 80, 10, 0.6)', 'rgba(190, 129, 45, 0.6)', 'rgba(222, 193, 124, 0.6)', 'rgba(246, 232, 193, 0.6)', 'rgba(200, 234, 229, 0.6)', 'rgba(126, 205, 193, 0.6)', 'rgba(53, 151, 143, 0.6)', 'rgba(1, 101, 93, 0.6)', 'rgba(0, 61, 49, 0.6)'];
+//CHART SECTION ONLY
+
+//Transparant colors for the main bar and wedges.
+var arrayOfColors = ['rgba(142, 1, 81, 0.6)', 'rgba(197, 27, 126, 0.6)', 'rgba(222, 120, 174, 0.6)', 'rgba(241, 182, 219, 0.6)', 'rgba(253, 226, 240, 0.6)', 'rgba(231, 245, 209, 0.6)', 'rgba(183, 224, 133, 0.6)', 'rgba(128, 190, 65, 0.6)', 'rgba(76, 145, 33, 0.6)', 'rgba(40, 102, 25, 0.6)', 'rgba(82, 47, 5, 0.6)', 'rgba(138, 80, 10, 0.6)', 'rgba(190, 129, 45, 0.6)', 'rgba(222, 193, 124, 0.6)', 'rgba(246, 232, 193, 0.6)', 'rgba(200, 234, 229, 0.6)', 'rgba(126, 205, 193, 0.6)', 'rgba(53, 151, 143, 0.6)', 'rgba(1, 101, 93, 0.6)', 'rgba(0, 61, 49, 0.6)'];
+
+//Solid colors of the transparent ones above for borders shown on HOVER ONLY
+var arrayOfAccentColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
 //Use Chart.js to create a graph
 function renderSelectionChart() {
@@ -177,8 +180,8 @@ function renderSelectionChart() {
       datasets: [{
         label: 'Product Selections',
         data: imageSelection,
-        backgroundColor: arrayOfAccentColors,
-        borderColor: arrayOfColors,
+        backgroundColor: arrayOfColors,
+        borderColor: arrayOfAccentColors,
         borderWidth: 0,
         hoverBorderWidth: 7,
       }]
@@ -205,9 +208,6 @@ function renderImageChart() {
   //access the canvas element from the DOM using var
   var context = document.getElementById('images-chart').getContext('2d');
 
-  //establish an array of colors for the bars
-  // var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
-
   new Chart(context, {
     type: 'doughnut',
     data: {
@@ -215,8 +215,8 @@ function renderImageChart() {
       datasets: [{
         label: 'Images Shown',
         data: imageShown,
-        backgroundColor: arrayOfAccentColors,
-        borderColor: arrayOfColors,
+        backgroundColor: arrayOfColors,
+        borderColor: arrayOfAccentColors,
         borderWidth: 0,
         hoverBorderWidth: 7,
       }]
@@ -229,6 +229,63 @@ function renderImageChart() {
       },
       scales: {
       },
+    }
+  });
+}
+
+
+function renderComparisonChart() {
+  //access the canvas element from the DOM using var
+  var context = document.getElementById('comparison-chart').getContext('2d');
+
+  new Chart(context, {
+    type: 'line',
+    data: {
+      labels: productNamesArray,
+      datasets: [{
+        label: 'Votes Per Item',
+        data: imageSelection,
+        lineTension: 0,
+        fill: true,
+        borderColor: 'rgb(54, 132, 175)',
+        backgroundColor: 'rgba(54, 132, 175, 0.6',
+        pointBorderColor: 'rgb(54, 132, 175)',
+        pointBackgroundColor: arrayOfAccentColors,
+        pointRadius: 5,
+        pointHoverRadius: 10,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rectRounded'
+      },{
+        label: 'Times Item Was Shown',
+        data: imageShown,
+        lineTension: 0,
+        fill: true,
+        borderColor: 'rgb(95, 180, 126)',
+        backgroundColor: 'rgba(95, 180, 126, 0.6)',
+        pointBorderColor: 'rgb(95, 180, 126)',
+        pointBackgroundColor: arrayOfAccentColors,
+        pointRadius: 5,
+        pointHoverRadius: 10,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'rectRounded'
+      }],
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            stepSize: 3,
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            autoSkip: false,
+          }
+        }]
+      }
     }
   });
 }

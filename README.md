@@ -9,11 +9,12 @@ Bus Mall will track  20 different objects to see their popularity with a focus g
 * Color palette for the charts are from http://colrd.com/palette/18823/ and http://colrd.com/palette/18841/
 * Box shadow help by https://www.cssmatic.com/box-shadow
 * Branding Guide for Sound Transit is found at https://www.soundtransit.org/st-brand-graphic-elements
+* Used this site extensively for customizing the charts: https://code.tutsplus.com/tutorials/getting-started-with-chartjs-line-and-bar-charts--cms-28384
 
 ## Prerequisites
 Used Chart.js Library for the bar graph, http://www.chartjs.org/docs/latest/
 
-### Installation Instructions
+### Installation Instructions for Chart.js Library
 1. Go to http://www.chartjs.org/docs/latest/
 2. In the first paragraph under Installation, click on the Chart.js CDN link
 3. This page will open, https://cdnjs.com/libraries/Chart.js
