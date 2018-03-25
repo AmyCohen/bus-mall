@@ -158,14 +158,17 @@ ulImageElement.addEventListener('click', handleClick);
 pictureList();
 randomImage();
 
+//CHART SECTION ONLY
+//establish an array of colors for the bars
+var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
+
+//added transpartent versions of the hex colors above
+var arrayOfAccentColors = ['rgba(142, 1, 81, 0.6)', 'rgba(197, 27, 126, 0.6)', 'rgba(222, 120, 174, 0.6)', 'rgba(241, 182, 219, 0.6)', 'rgba(253, 226, 240, 0.6)', 'rgba(231, 245, 209, 0.6)', 'rgba(183, 224, 133, 0.6)', 'rgba(128, 190, 65, 0.6)', 'rgba(76, 145, 33, 0.6)', 'rgba(40, 102, 25, 0.6)', 'rgba(82, 47, 5, 0.6)', 'rgba(138, 80, 10, 0.6)', 'rgba(190, 129, 45, 0.6)', 'rgba(222, 193, 124, 0.6)', 'rgba(246, 232, 193, 0.6)', 'rgba(200, 234, 229, 0.6)', 'rgba(126, 205, 193, 0.6)', 'rgba(53, 151, 143, 0.6)', 'rgba(1, 101, 93, 0.6)', 'rgba(0, 61, 49, 0.6)'];
 
 //Use Chart.js to create a graph
 function renderSelectionChart() {
   //access the canvas element from the DOM using var
   var context = document.getElementById('results-chart').getContext('2d');
-
-  //establish an array of colors for the bars
-  var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
   new Chart(context, {
     type: 'bar',
@@ -174,9 +177,10 @@ function renderSelectionChart() {
       datasets: [{
         label: 'Product Selections',
         data: imageSelection,
-        backgroundColor: arrayOfColors,
-        borderColor: ['rgb(0, 0, 0)'],
-        borderWidth: 5,
+        backgroundColor: arrayOfAccentColors,
+        borderColor: arrayOfColors,
+        borderWidth: 0,
+        hoverBorderWidth: 7,
       }]
     },
     options: {
@@ -202,7 +206,7 @@ function renderImageChart() {
   var context = document.getElementById('images-chart').getContext('2d');
 
   //establish an array of colors for the bars
-  var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
+  // var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
   new Chart(context, {
     type: 'doughnut',
@@ -211,7 +215,10 @@ function renderImageChart() {
       datasets: [{
         label: 'Images Shown',
         data: imageShown,
-        backgroundColor: arrayOfColors,
+        backgroundColor: arrayOfAccentColors,
+        borderColor: arrayOfColors,
+        borderWidth: 0,
+        hoverBorderWidth: 7,
       }]
     },
     options: {
