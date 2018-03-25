@@ -10,7 +10,10 @@
   <body>
     
     <header>
-      <h1>Bus Mall Focus Group</h1>
+      <div>
+        <img src="img/sounderImageSmall.jpg" alt="Bus Mall Logo" title="Bus Mall Logo">
+        <h1><span>Bus Mall Focus Group</span></h1>
+      </div>
     </header>
 
     <main>
@@ -35,10 +38,20 @@
         </div>
       </section>
 
+      <section class="buttonWrapper">
+          <a onclick="showAnalytics()" class="button" href="#">Click to Show Analytics</a>
+        <div>
+          <p>If clicked prior to voting, please click again to refresh results.</p>
+        </div>
+      </section>
+
+
+    <div id="graphs" style="display:none">
       <section class="canvas">
         <div>
           <header>
-      <h2>Product Selection Based on Popularity</h2>
+            <h2>Product Selection Based on Popularity</h2>
+            <h3>Analytics will be shown upon completion.</h3>
           </header>
         <canvas id="results-chart"></canvas>
         </div>
@@ -48,15 +61,30 @@
         <div>
           <header>
             <h2>Total Amount of Times an Image was Shown </h2>
+            <h3>Analytics will be shown upon completion.</h3>
           </header>
         <canvas id="images-chart"></canvas>
         </div>
       </section>
 
+      <section class="canvas">
+        <div>
+          <header>
+            <h2>Comparison Between Votes and Offerings </h2>
+            <h3>Analytics will be shown upon completion.</h3>
+          </header>
+        <canvas id="comparison-chart"></canvas>
+        </div>
+      </section>
+    </div>
 
     </main>
 
-    <footer></footer>
+    <footer>
+      <div>
+        <img src="img/rideTheWaveFull.jpg" alt="Ride the Wave" title="Ride the Wave Logo">
+      </div>
+    </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
     <script src="js/app.js"></script>

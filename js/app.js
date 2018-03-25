@@ -1,6 +1,5 @@
 'use strict';
 
-//create an array to store the array of objects for each picture
 Products.possibleProducts =[];
 Products.imageAssortment =[];
 Products.allotedGuesses = 0;
@@ -9,8 +8,6 @@ Products.allotedGuesses = 0;
 var productNamesArray = [];
 //votes per picture
 var imageSelection = [];
-
-console.log('first declaration of this array ', imageSelection);
 //how many times picture is shown
 var imageShown = [];
 
@@ -85,8 +82,6 @@ function randomImage() {
   (Products.imageAssortment.includes(randomIndex2)) ||
   (Products.imageAssortment.includes(randomIndex3 ))) {
 
-    // console.log('duplicate caught!');
-
     randomIndex1 = Math.floor(Math.random() * Products.possibleProducts.length);
     randomIndex2 = Math.floor(Math.random() * Products.possibleProducts.length);
     randomIndex3 = Math.floor(Math.random() * Products.possibleProducts.length);
@@ -112,7 +107,6 @@ function randomImage() {
   }
 
   //Track last images used (replaced my viewed Function)
-  // console.log(Products.imageAssortment);
   Products.imageAssortment[0] = randomIndex1;
   Products.imageAssortment[1] = randomIndex2;
   Products.imageAssortment[2] = randomIndex3;
@@ -121,8 +115,7 @@ function randomImage() {
 function handleClick(event) {
   //increment the click counter
   Products.allotedGuesses++;
-  //increment the votes per image
-  //use a for loop to find which picture was clicked
+  //increment the votes per image and loop through to find image that was clicked
   for (var i = 0; i < Products.possibleProducts.length; i++) {
     if(event.target.alt === Products.possibleProducts[i].name) {
       Products.possibleProducts[i].timesClicked++;
@@ -140,10 +133,6 @@ function handleClick(event) {
     //update image selections
     updateWhenClicked();
 
-    //display chart
-    renderSelectionChart();
-    renderImageChart();
-
   } else {
     //if less than 25, keep displaying images
     randomImage();
@@ -156,34 +145,6 @@ function updateWhenClicked () {
   }
 }
 
-//---------------------------------------------
-// function updateWhenClicked () {
-
-//   for (var i = 0; i < Products.possibleProducts.length; i++) {
-//     //adding votes to local storage
-//     var saveImageSelections = JSON.stringify(Products.possibleProducts[i].timesClicked);
-//     localStorage.setItem('updatedVotes', saveImageSelections);
-//     console.log('stringifying ' , saveImageSelections);
-
-//     //call back that information and put it in an array
-//     imageSelection.push(JSON.parse(localStorage.getItem('updatedVotes')));
-
-//   }
-//   console.log('saving votes ', imageSelection);
-// }
-//---------------------------------------------
-
-
-// function fillArrays (){
-//   for (var i = 0; i<Products.possibleProducts; i++) {
-//     productNamesArray.push(Products.possibleProducts[i].name);
-//     imageSelection.push(Products.possibleProducts[i].timesClicked);
-//   }
-// }
-
-
-console.log('saving votes outside function', imageSelection);
-
 ulImageElement.addEventListener('click', handleClick);
 
 //render the image on the page - PAGE LOAD
@@ -191,13 +152,33 @@ pictureList();
 randomImage();
 
 
+//CHART SECTION ONLY
+
+//Button Click Event
+function showAnalytics() {
+  var showGraphs = document.getElementById('graphs');
+  if (showGraphs.style.display === 'none') {
+    showGraphs.style.display = 'block';
+    renderSelectionChart();
+    renderImageChart();
+    renderComparisonChart();
+
+  } else {
+    showGraphs.style.display = 'none';
+
+  }
+}
+
+//Transparant colors for the main bar and wedges.
+var arrayOfColors = ['rgba(142, 1, 81, 0.6)', 'rgba(197, 27, 126, 0.6)', 'rgba(222, 120, 174, 0.6)', 'rgba(241, 182, 219, 0.6)', 'rgba(253, 226, 240, 0.6)', 'rgba(231, 245, 209, 0.6)', 'rgba(183, 224, 133, 0.6)', 'rgba(128, 190, 65, 0.6)', 'rgba(76, 145, 33, 0.6)', 'rgba(40, 102, 25, 0.6)', 'rgba(82, 47, 5, 0.6)', 'rgba(138, 80, 10, 0.6)', 'rgba(190, 129, 45, 0.6)', 'rgba(222, 193, 124, 0.6)', 'rgba(246, 232, 193, 0.6)', 'rgba(200, 234, 229, 0.6)', 'rgba(126, 205, 193, 0.6)', 'rgba(53, 151, 143, 0.6)', 'rgba(1, 101, 93, 0.6)', 'rgba(0, 61, 49, 0.6)'];
+
+//Solid colors of the transparent ones above for borders shown on HOVER ONLY
+var arrayOfAccentColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
+
 //Use Chart.js to create a graph
 function renderSelectionChart() {
   //access the canvas element from the DOM using var
   var context = document.getElementById('results-chart').getContext('2d');
-
-  //establish an array of colors for the bars
-  var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
   new Chart(context, {
     type: 'bar',
@@ -207,6 +188,9 @@ function renderSelectionChart() {
         label: 'Product Selections',
         data: imageSelection,
         backgroundColor: arrayOfColors,
+        borderColor: arrayOfAccentColors,
+        borderWidth: 0,
+        hoverBorderWidth: 7,
       }]
     },
     options: {
@@ -214,7 +198,7 @@ function renderSelectionChart() {
         yAxes: [{
           ticks: {
             beginAtZero: true,
-            stepSize: 5,
+            stepSize: 1,
           }
         }],
         xAxes: [{
@@ -227,12 +211,11 @@ function renderSelectionChart() {
   });
 }
 
+
+
 function renderImageChart() {
   //access the canvas element from the DOM using var
   var context = document.getElementById('images-chart').getContext('2d');
-
-  //establish an array of colors for the bars
-  var arrayOfColors = ['#8E0152', '#C51B7D', '#DE77AE', '#F1B6DA', '#FDE0EF', '#E6F5D0', '#B8E186', '#7FBC41', '#4D9221', '#276419', '#543005', '#8C510A', '#BF812D', '#DFC27D', '#F6E8C3', '#C7EAE5', '#80CDC1', '#35978F', '#01665E', '#003C30'];
 
   new Chart(context, {
     type: 'doughnut',
@@ -242,6 +225,9 @@ function renderImageChart() {
         label: 'Images Shown',
         data: imageShown,
         backgroundColor: arrayOfColors,
+        borderColor: arrayOfAccentColors,
+        borderWidth: 0,
+        hoverBorderWidth: 7,
       }]
     },
     options: {
@@ -252,6 +238,63 @@ function renderImageChart() {
       },
       scales: {
       },
+    }
+  });
+}
+
+
+function renderComparisonChart() {
+  //access the canvas element from the DOM using var
+  var context = document.getElementById('comparison-chart').getContext('2d');
+
+  new Chart(context, {
+    type: 'line',
+    data: {
+      labels: productNamesArray,
+      datasets: [{
+        label: 'Votes Per Item',
+        data: imageSelection,
+        lineTension: 0,
+        fill: true,
+        borderColor: 'rgb(54, 132, 175)',
+        backgroundColor: 'rgba(54, 132, 175, 0.6',
+        pointBorderColor: 'rgb(54, 132, 175)',
+        pointBackgroundColor: arrayOfAccentColors,
+        pointRadius: 5,
+        pointHoverRadius: 10,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'circle'
+      },{
+        label: 'Times Item Was Shown',
+        data: imageShown,
+        lineTension: 0,
+        fill: true,
+        borderColor: 'rgb(95, 180, 126)',
+        backgroundColor: 'rgba(95, 180, 126, 0.6)',
+        pointBorderColor: 'rgb(95, 180, 126)',
+        pointBackgroundColor: arrayOfAccentColors,
+        pointRadius: 5,
+        pointHoverRadius: 10,
+        pointHitRadius: 30,
+        pointBorderWidth: 2,
+        pointStyle: 'circle'
+      }],
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true,
+            stepSize: 3,
+          }
+        }],
+        xAxes: [{
+          ticks: {
+            autoSkip: false,
+          }
+        }]
+      }
     }
   });
 }
