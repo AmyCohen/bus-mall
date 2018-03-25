@@ -4,10 +4,11 @@
 Bus Mall will track  20 different objects to see their popularity with a focus group.  The plan is to implement the most popular items into a magazine that will be available to Puget Sound riders.
 
 ## Getting Started
-Used the .eslintrc.json and the .gitignore from the class repo
-Used the Meyer's css reset
-Color palette for the charts are from http://colrd.com/palette/18823/ and http://colrd.com/palette/18841/
-Box shadow help by https://www.cssmatic.com/box-shadow
+* Used the .eslintrc.json and the .gitignore from the class repo
+* Used the Meyer's css reset
+* Color palette for the charts are from http://colrd.com/palette/18823/ and http://colrd.com/palette/18841/
+* Box shadow help by https://www.cssmatic.com/box-shadow
+* Branding Guide for Sound Transit is found at https://www.soundtransit.org/st-brand-graphic-elements
 
 ## Prerequisites
 Used Chart.js Library for the bar graph, http://www.chartjs.org/docs/latest/
