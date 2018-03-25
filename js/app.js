@@ -1,6 +1,5 @@
 'use strict';
 
-//create an array to store the array of objects for each picture
 Products.possibleProducts =[];
 Products.imageAssortment =[];
 Products.allotedGuesses = 0;
@@ -9,8 +8,6 @@ Products.allotedGuesses = 0;
 var productNamesArray = [];
 //votes per picture
 var imageSelection = [];
-
-console.log('first declaration of this array ', imageSelection);
 //how many times picture is shown
 var imageShown = [];
 
@@ -136,11 +133,6 @@ function handleClick(event) {
     //update image selections
     updateWhenClicked();
 
-    //display chart
-    renderSelectionChart();
-    renderImageChart();
-    renderComparisonChart();
-
   } else {
     //if less than 25, keep displaying images
     randomImage();
@@ -161,6 +153,21 @@ randomImage();
 
 
 //CHART SECTION ONLY
+
+//Button Click Event
+function showAnalytics() {
+  var showGraphs = document.getElementById('graphs');
+  if (showGraphs.style.display === 'none') {
+    showGraphs.style.display = 'block';
+    renderSelectionChart();
+    renderImageChart();
+    renderComparisonChart();
+
+  } else {
+    showGraphs.style.display = 'none';
+
+  }
+}
 
 //Transparant colors for the main bar and wedges.
 var arrayOfColors = ['rgba(142, 1, 81, 0.6)', 'rgba(197, 27, 126, 0.6)', 'rgba(222, 120, 174, 0.6)', 'rgba(241, 182, 219, 0.6)', 'rgba(253, 226, 240, 0.6)', 'rgba(231, 245, 209, 0.6)', 'rgba(183, 224, 133, 0.6)', 'rgba(128, 190, 65, 0.6)', 'rgba(76, 145, 33, 0.6)', 'rgba(40, 102, 25, 0.6)', 'rgba(82, 47, 5, 0.6)', 'rgba(138, 80, 10, 0.6)', 'rgba(190, 129, 45, 0.6)', 'rgba(222, 193, 124, 0.6)', 'rgba(246, 232, 193, 0.6)', 'rgba(200, 234, 229, 0.6)', 'rgba(126, 205, 193, 0.6)', 'rgba(53, 151, 143, 0.6)', 'rgba(1, 101, 93, 0.6)', 'rgba(0, 61, 49, 0.6)'];
@@ -203,6 +210,8 @@ function renderSelectionChart() {
     }
   });
 }
+
+
 
 function renderImageChart() {
   //access the canvas element from the DOM using var
@@ -255,7 +264,7 @@ function renderComparisonChart() {
         pointHoverRadius: 10,
         pointHitRadius: 30,
         pointBorderWidth: 2,
-        pointStyle: 'rectRounded'
+        pointStyle: 'circle'
       },{
         label: 'Times Item Was Shown',
         data: imageShown,
@@ -269,7 +278,7 @@ function renderComparisonChart() {
         pointHoverRadius: 10,
         pointHitRadius: 30,
         pointBorderWidth: 2,
-        pointStyle: 'rectRounded'
+        pointStyle: 'circle'
       }],
     },
     options: {

@@ -10,6 +10,8 @@ Bus Mall will track  20 different objects to see their popularity with a focus g
 * Box shadow help by https://www.cssmatic.com/box-shadow
 * Branding Guide for Sound Transit is found at https://www.soundtransit.org/st-brand-graphic-elements
 * Used this site extensively for customizing the charts: https://code.tutsplus.com/tutorials/getting-started-with-chartjs-line-and-bar-charts--cms-28384
+* Used this tutorial for hiding the graphs on click: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_toggle_hide_show and https://www.w3schools.com/howto/howto_js_toggle_hide_show.asp
+* Button Generator: http://buttonoptimizer.com/#
 
 ## Prerequisites
 Used Chart.js Library for the bar graph, http://www.chartjs.org/docs/latest/
@@ -27,6 +29,7 @@ Used Chart.js Library for the bar graph, http://www.chartjs.org/docs/latest/
 
 ## Author
 Amy Cohen
+* Git Hub: https://github.com/AmyCohen/bus-mall
 
 ## License
 This project is licensed under MIT License.  Please see the LICENSE.md file for details
@@ -35,3 +38,5 @@ This project is licensed under MIT License.  Please see the LICENSE.md file for 
 Thank you to Sam, and Timea, Katy, Ria, and Jennifer for sitting with me every day and allowing the discussion to flow freely.
 
 Thank you to the TAs and John and Allie for helping me when I got stuck and understanding my frustration and not reacting to it.
+
+## Deployed Version

@@ -61,7 +61,7 @@ section#imageClicked {
   background-color: #50bec8;
   border: 2px solid black;
   width: 960px;
-  margin: auto;
+  margin: 50px auto;
 }
 div.col-3 {
   display: inline-block;
@@ -116,3 +116,52 @@ footer div img {
   width: 100%;
 }
 
+section.buttonWrapper {
+  width: 960px;
+  margin: 30px auto;
+}
+
+section.buttonWrapper a {
+  margin: 0 auto;
+}
+
+section.buttonWrapper p {
+  color: #2b376e;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 5px 0px;
+}
+
+/* FROM BUTTON GENERATOR */
+.button {
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px 24px;
+  border: 1px solid #7cb13a;
+  border-radius: 8px;
+  background: #7cb13a;
+  background: -webkit-gradient(linear, left top, left bottom, from(#7cb13a), to(#7cb13a));
+  background: -moz-linear-gradient(top, #7cb13a, #7cb13a);
+  background: linear-gradient(to bottom, #7cb13a, #7cb13a);
+  font: normal normal bold 20px arial;
+  color: #ffffff;
+  text-decoration: none;
+}
+.button:hover,
+.button:focus {
+  border: 1px solid #a1e64b;
+  background: #95d446;
+  background: -webkit-gradient(linear, left top, left bottom, from(#95d446), to(#95d446));
+  background: -moz-linear-gradient(top, #95d446, #95d446);
+  background: linear-gradient(to bottom, #95d446, #95d446);
+  color: #ffffff;
+  text-decoration: none;
+}
+.button:active {
+  background: #4a6a23;
+  background: -webkit-gradient(linear, left top, left bottom, from(#4a6a23), to(#7cb13a));
+  background: -moz-linear-gradient(top, #4a6a23, #7cb13a);
+  background: linear-gradient(to bottom, #4a6a23, #7cb13a);
+}
