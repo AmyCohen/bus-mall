@@ -175,6 +175,8 @@ function renderSelectionChart() {
         label: 'Product Selections',
         data: imageSelection,
         backgroundColor: arrayOfColors,
+        borderColor: ['rgb(0, 0, 0)'],
+        borderWidth: 5,
       }]
     },
     options: {
